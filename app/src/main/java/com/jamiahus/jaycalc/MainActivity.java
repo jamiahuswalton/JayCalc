@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 
 public class MainActivity extends Activity {
+    //Buttons for main screen
     private Button myButton_0;
     private Button myButton_1;
     private Button myButton_2;
