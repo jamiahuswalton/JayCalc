@@ -18,6 +18,7 @@
         android:inputType="textPersonName"
         android:text="Calculation"
         android:textSize="24sp" />
+
     <TextView
         android:id="@+id/editText_Calculation_Display"
         android:layout_width="match_parent"

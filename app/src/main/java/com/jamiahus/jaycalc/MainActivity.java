@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class MainActivity extends Activity {
     //Buttons for main screen
@@ -18,16 +19,33 @@ public class MainActivity extends Activity {
     private Button myButton_7;
     private Button myButton_8;
     private Button myButton_9;
+    private Button myButton_plus;
+    private Button myButton_minus;
+    private Button myButton_divide;
+    private Button myButton_dot;
+    private Button myButton_delete;
+    private TextView myCalculationDisplay;
+
+    private OperationNumber runningNumber;
+
+    private OperationContainer Calculation;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        runningNumber = new OperationNumber(OperationType.Number);
+        Calculation = new OperationContainer();
+
         myButton_0 = findViewById(R.id.button_0);
         myButton_0.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("Button number:","0");
+                String buttonValue = "0";
+                if (!runningNumber.GetRunningNumber().isEmpty()){
+                    runningNumber.AppendNumberToRunningNumber(buttonValue);
+                    Log.d("Append Test (0): ",runningNumber.GetRunningNumber());
+                }
             }
         });
 
@@ -35,7 +53,14 @@ public class MainActivity extends Activity {
         myButton_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("Button number:","1");
+                String buttonValue = "1";
+                if (!runningNumber.GetRunningNumber().isEmpty()){
+                    runningNumber.AppendNumberToRunningNumber(buttonValue);
+                    Log.d("Append Test (1): ",runningNumber.GetRunningNumber());
+                } else{
+                    runningNumber.SetRunningNumber(buttonValue);
+                    Log.d("After empty (1): ", runningNumber.GetRunningNumber());
+                }
             }
         });
 
@@ -102,5 +127,59 @@ public class MainActivity extends Activity {
                 Log.d("Button number:","9");
             }
         });
+
+        myButton_plus = findViewById(R.id.button_plus);
+        myButton_plus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("Button number:","+");
+                if ( !Calculation.IsOpertationListEmpty() ){
+                    if (!Calculation.IsLastOperationAnumber()){
+                        Calculation.AddOperationToList(runningNumber);
+                        //TODO: Make sure the last number was added and clear out the running number value.
+                    }
+                }
+            }
+        });
+
+        myButton_minus = findViewById(R.id.button_minus);
+        myButton_minus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("Button number:","-");
+            }
+        });
+
+        myButton_divide = findViewById(R.id.button_divide);
+        myButton_divide.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("Button number:","/");
+            }
+        });
+
+        myButton_dot = findViewById(R.id.button_dot);
+        myButton_dot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("Button number:",".");
+            }
+        });
+
+        myButton_delete = findViewById(R.id.button_delete);
+        myButton_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!runningNumber.GetRunningNumber().isEmpty()){
+                    //Start
+                    runningNumber.UnAppendNumberToRunningNumber();
+                    Log.d("After Delete: ", runningNumber.GetRunningNumber());
+                }
+            }
+        });
+    }
+
+    private void StoreOperation(){
+
     }
 }
