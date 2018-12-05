@@ -27,4 +27,8 @@ public class OperationNumber extends OperationBase {
     public void SetRunningNumber(String newValue){
         RunningNumber = newValue;
     }
+
+    public void ClearRunningNumber(){
+        RunningNumber = "";
+    }
 }

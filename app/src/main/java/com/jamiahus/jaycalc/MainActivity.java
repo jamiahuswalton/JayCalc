@@ -132,12 +132,17 @@ public class MainActivity extends Activity {
         myButton_plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("Button number:","+");
-                if ( !Calculation.IsOpertationListEmpty() ){
-                    if (!Calculation.IsLastOperationAnumber()){
+                OperationBase buttonOperation = new OperationBase(OperationType.Add);
+                if ( !Calculation.IsOpertationListEmpty()){
+                    if (Calculation.IsLastOperationAnumber()){
                         Calculation.AddOperationToList(runningNumber);
-                        //TODO: Make sure the last number was added and clear out the running number value.
+                        Calculation.AddOperationToList(buttonOperation);
+                        runningNumber.ClearRunningNumber();
                     }
+                } else{
+                    Calculation.AddOperationToList(runningNumber);
+                    Calculation.AddOperationToList(buttonOperation);
+                    runningNumber.ClearRunningNumber();
                 }
             }
         });
