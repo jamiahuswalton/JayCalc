@@ -24,6 +24,7 @@ public class MainActivity extends Activity {
     private Button myButton_divide;
     private Button myButton_dot;
     private Button myButton_delete;
+    private Button myButton_equals;
     private TextView myCalculationDisplay;
 
     private OperationNumber runningNumber;
@@ -180,6 +181,19 @@ public class MainActivity extends Activity {
                     runningNumber.UnAppendNumberToRunningNumber();
                     Log.d("After Delete: ", runningNumber.GetRunningNumber());
                 }
+            }
+        });
+
+        myButton_equals = findViewById(R.id.button_equals);
+        myButton_equals.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!runningNumber.IsRunningNumberEmpty()){
+                    Calculation.AddOperationToList(runningNumber);
+                }
+                Calculation.CalculateEquation();
+                runningNumber.ClearRunningNumber();
+                //TODO: Determine if it is best to clear the calcuation variable should be cleared as well.
             }
         });
     }

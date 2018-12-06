@@ -31,4 +31,8 @@ public class OperationNumber extends OperationBase {
     public void ClearRunningNumber(){
         RunningNumber = "";
     }
+
+    public boolean IsRunningNumberEmpty(){
+        return RunningNumber.isEmpty();
+    }
 }

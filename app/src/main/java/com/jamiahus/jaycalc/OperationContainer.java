@@ -1,5 +1,7 @@
 package com.jamiahus.jaycalc;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,5 +25,20 @@ public class OperationContainer {
 
     public boolean IsOpertationListEmpty(){
         return ListOfOperations.size() == 0;
+    }
+
+    public String CalculateEquation(){
+        String result = "Error";
+        float tempNumber;
+        for (OperationBase calculationTpye: ListOfOperations) {
+            if (calculationTpye.GetOperationType() == OperationType.Number){
+                OperationNumber currentNumber = (OperationNumber)calculationTpye;
+                tempNumber = Float.parseFloat(currentNumber.GetRunningNumber());
+                Log.d("Calculation", String.valueOf(tempNumber));
+            }
+        }
+
+
+        return result;
     }
 }
