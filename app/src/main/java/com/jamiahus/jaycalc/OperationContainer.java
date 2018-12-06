@@ -37,8 +37,6 @@ public class OperationContainer {
                 Log.d("Calculation", String.valueOf(tempNumber));
             }
         }
-
-
         return result;
     }
 }

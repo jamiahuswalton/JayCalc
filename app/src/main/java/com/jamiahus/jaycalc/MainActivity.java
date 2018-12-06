@@ -134,14 +134,16 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 OperationBase buttonOperation = new OperationBase(OperationType.Add);
+                OperationNumber numberToAdd = new OperationNumber(OperationType.Number);
+                numberToAdd.SetRunningNumber(runningNumber.GetRunningNumber());
                 if ( !Calculation.IsOpertationListEmpty()){
                     if (Calculation.IsLastOperationAnumber()){
-                        Calculation.AddOperationToList(runningNumber);
+                        Calculation.AddOperationToList(numberToAdd);
                         Calculation.AddOperationToList(buttonOperation);
                         runningNumber.ClearRunningNumber();
                     }
                 } else{
-                    Calculation.AddOperationToList(runningNumber);
+                    Calculation.AddOperationToList(numberToAdd);
                     Calculation.AddOperationToList(buttonOperation);
                     runningNumber.ClearRunningNumber();
                 }
@@ -188,11 +190,15 @@ public class MainActivity extends Activity {
         myButton_equals.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if (!runningNumber.IsRunningNumberEmpty()){
-                    Calculation.AddOperationToList(runningNumber);
+                    OperationNumber numberToAdd = new OperationNumber(OperationType.Number);
+                    numberToAdd.SetRunningNumber(runningNumber.GetRunningNumber());
+                    Calculation.AddOperationToList(numberToAdd);
+                    runningNumber.ClearRunningNumber();
                 }
                 Calculation.CalculateEquation();
-                runningNumber.ClearRunningNumber();
+
                 //TODO: Determine if it is best to clear the calcuation variable should be cleared as well.
             }
         });
