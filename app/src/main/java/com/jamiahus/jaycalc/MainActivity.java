@@ -137,7 +137,7 @@ public class MainActivity extends Activity {
                 OperationNumber numberToAdd = new OperationNumber(OperationType.Number);
                 numberToAdd.SetRunningNumber(runningNumber.GetRunningNumber());
                 if ( !Calculation.IsOpertationListEmpty()){
-                    if (Calculation.IsLastOperationAnumber()){
+                    if (!Calculation.IsLastOperationAnumber()){
                         Calculation.AddOperationToList(numberToAdd);
                         Calculation.AddOperationToList(buttonOperation);
                         runningNumber.ClearRunningNumber();

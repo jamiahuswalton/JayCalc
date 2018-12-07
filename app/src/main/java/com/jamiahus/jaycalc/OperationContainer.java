@@ -28,26 +28,30 @@ public class OperationContainer {
     }
 
     public String CalculateEquation(){
-        String result = "Error";
-        float tempNumber;
+        String finalResult = "Error";
+        float runningResultNumber = 0.0f;
 
         for (int i = 0; i < ListOfOperations.size(); i++){
+            
             OperationBase calculationTpye = ListOfOperations.get(i);
-            if (calculationTpye.GetOperationType() == OperationType.Number){
-                OperationNumber currentNumber = (OperationNumber)calculationTpye;
-                tempNumber = Float.parseFloat(currentNumber.GetRunningNumber());
-                Log.d("Calculation", String.valueOf(tempNumber));
-            } else if (calculationTpye.GetOperationType() == OperationType.Add){
-                OperationNumber previousNumber = (OperationNumber) ListOfOperations.get(i-1);
-                OperationNumber nextNumber = (OperationNumber) ListOfOperations.get(i+1);
-                float previousNumberFloat = Float.parseFloat(previousNumber.GetRunningNumber());
-                float nextNumberFloat = Float.parseFloat(nextNumber.GetRunningNumber());
-                float additionResult = previousNumberFloat + nextNumberFloat;
-                Log.d("Results", String.valueOf(additionResult));
-                //TODO: Test to make sure this is working properly.
+            if (i == 1){
+                if (calculationTpye.GetOperationType() == OperationType.Add){
+                    OperationNumber previousNumber = (OperationNumber) ListOfOperations.get(i-1);
+                    OperationNumber nextNumber = (OperationNumber) ListOfOperations.get(i+1);
+                    float previousNumberFloat = Float.parseFloat(previousNumber.GetRunningNumber());
+                    float nextNumberFloat = Float.parseFloat(nextNumber.GetRunningNumber());
+                    runningResultNumber = previousNumberFloat + nextNumberFloat;
+                }
+                //TODO: Need to add code to handle the different operations (e.g., Add, subtract, etc.)
+            } else {
+                if(calculationTpye.GetOperationType() == OperationType.Add){
+                    OperationNumber nextNumber = (OperationNumber) ListOfOperations.get(i+1);
+                    float nextNumberFloat = Float.parseFloat(nextNumber.GetRunningNumber());
+                    runningResultNumber += nextNumberFloat;
+                }
             }
-            //TODO: Need to add code to handle the different operations (e.g., Add, subtract, etc.)
         }
-        return result;
+        Log.d("Results", String.valueOf(runningResultNumber));
+        return String.valueOf(runningResultNumber);
     }
 }
