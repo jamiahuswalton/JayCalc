@@ -25,7 +25,10 @@ public class MainActivity extends Activity {
     private Button myButton_dot;
     private Button myButton_delete;
     private Button myButton_equals;
+
     private TextView myCalculationDisplay;
+
+    private String addDisplay = "+";
 
     private OperationNumber runningNumber;
 
@@ -37,6 +40,7 @@ public class MainActivity extends Activity {
 
         runningNumber = new OperationNumber(OperationType.Number);
         Calculation = new OperationContainer();
+        myCalculationDisplay = findViewById(R.id.editText_Calculation_Display);
 
         myButton_0 = findViewById(R.id.button_0);
         myButton_0.setOnClickListener(new View.OnClickListener() {
@@ -47,6 +51,7 @@ public class MainActivity extends Activity {
                     runningNumber.AppendNumberToRunningNumber(buttonValue);
                     Log.d("Append Test (0): ",runningNumber.GetRunningNumber());
                 }
+                UpdateCalculationDisplay();
             }
         });
 
@@ -62,6 +67,7 @@ public class MainActivity extends Activity {
                     runningNumber.SetRunningNumber(buttonValue);
                     Log.d("After empty (1): ", runningNumber.GetRunningNumber());
                 }
+                UpdateCalculationDisplay();
             }
         });
 
@@ -147,6 +153,7 @@ public class MainActivity extends Activity {
                     Calculation.AddOperationToList(buttonOperation);
                     runningNumber.ClearRunningNumber();
                 }
+                UpdateCalculationDisplay();
             }
         });
 
@@ -197,6 +204,7 @@ public class MainActivity extends Activity {
                     Calculation.AddOperationToList(numberToAdd);
                     runningNumber.ClearRunningNumber();
                 }
+                UpdateCalculationDisplay();
                 Calculation.CalculateEquation();
 
                 //TODO: Determine if it is best to clear the calcuation variable should be cleared as well.
@@ -204,7 +212,19 @@ public class MainActivity extends Activity {
         });
     }
 
-    private void StoreOperation(){
+    private void UpdateCalculationDisplay(){
+        String displayText = " ";
+        for (int i = 0; i < Calculation.ListOfOperations.size(); i++){
+            OperationBase currentBase = Calculation.ListOfOperations.get(i);
+            if (currentBase.GetOperationType() == OperationType.Number){
+                OperationNumber number = (OperationNumber) currentBase;
+                displayText +=  number.GetRunningNumber();
+            } else if (currentBase.GetOperationType() == OperationType.Add){
+                displayText +=  addDisplay;
+            }
+        }
 
+        displayText += runningNumber.GetRunningNumber();
+        myCalculationDisplay.setText(displayText);
     }
 }
