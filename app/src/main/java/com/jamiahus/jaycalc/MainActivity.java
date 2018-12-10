@@ -47,10 +47,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 String buttonValue = "0";
-                if (!runningNumber.GetRunningNumber().isEmpty()){
-                    runningNumber.AppendNumberToRunningNumber(buttonValue);
-                    Log.d("Append Test (0): ",runningNumber.GetRunningNumber());
-                }
+                AppendNumberToRunningNumber(buttonValue);
                 UpdateCalculationDisplay();
             }
         });
@@ -60,13 +57,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 String buttonValue = "1";
-                if (!runningNumber.GetRunningNumber().isEmpty()){
-                    runningNumber.AppendNumberToRunningNumber(buttonValue);
-                    Log.d("Append Test (1): ",runningNumber.GetRunningNumber());
-                } else{
-                    runningNumber.SetRunningNumber(buttonValue);
-                    Log.d("After empty (1): ", runningNumber.GetRunningNumber());
-                }
+                AppendNumberToRunningNumber(buttonValue);
                 UpdateCalculationDisplay();
             }
         });
@@ -207,12 +198,13 @@ public class MainActivity extends Activity {
                 UpdateCalculationDisplay();
                 Calculation.CalculateEquation();
 
-                //TODO: Determine if it is best to clear the calcuation variable should be cleared as well.
+                //TODO: Determine if it is best to clear the calcuation variable should be cleared as well. I am thinking that the calculation
             }
         });
     }
 
     private void UpdateCalculationDisplay(){
+        //TODO: Need to add a method that wil clear the calculation display once a calculation has been displayed
         String displayText = " ";
         for (int i = 0; i < Calculation.ListOfOperations.size(); i++){
             OperationBase currentBase = Calculation.ListOfOperations.get(i);
@@ -226,5 +218,16 @@ public class MainActivity extends Activity {
 
         displayText += runningNumber.GetRunningNumber();
         myCalculationDisplay.setText(displayText);
+    }
+
+    private void AppendNumberToRunningNumber(String buttonValue){
+
+        if (!runningNumber.GetRunningNumber().isEmpty()){
+            runningNumber.AppendNumberToRunningNumber(buttonValue);
+            Log.d("Append Test (1): ",runningNumber.GetRunningNumber());
+        } else if (!buttonValue.equals("0")){
+            runningNumber.SetRunningNumber(buttonValue);
+            Log.d("After empty (1): ", runningNumber.GetRunningNumber());
+        }
     }
 }

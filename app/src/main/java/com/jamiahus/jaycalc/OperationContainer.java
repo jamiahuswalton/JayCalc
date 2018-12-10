@@ -34,7 +34,6 @@ public class OperationContainer {
         for (int i = 0; i < ListOfOperations.size(); i++){
 
             OperationBase calculationTpye = ListOfOperations.get(i);
-            //TODO: Test to make sure the logic below works!
             if (i ==0 & ListOfOperations.size() == 1){
                 if (calculationTpye.GetOperationType() == OperationType.Number){
                     OperationNumber temp = (OperationNumber) calculationTpye;
@@ -48,9 +47,16 @@ public class OperationContainer {
                     float nextNumberFloat = Float.parseFloat(nextNumber.GetRunningNumber());
                     runningResultNumber = previousNumberFloat + nextNumberFloat;
                 }
+            } else if (i != ListOfOperations.size()-1){
+                if (calculationTpye.GetOperationType() == OperationType.Add){
+                    OperationNumber nextNumber = (OperationNumber) ListOfOperations.get(i+1);
+                    float nextNumberFloat = Float.parseFloat(nextNumber.GetRunningNumber());
+                    runningResultNumber += nextNumberFloat;
+                }
             }
         }
         Log.d("Results", String.valueOf(runningResultNumber));
-        return String.valueOf(runningResultNumber);
+        finalResult = String.valueOf(runningResultNumber);
+        return finalResult;
     }
 }
