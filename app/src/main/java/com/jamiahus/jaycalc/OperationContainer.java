@@ -32,7 +32,7 @@ public class OperationContainer {
     }
 
     public String CalculateEquation(){
-        String finalResult = "Error";
+        String finalResult;
         float runningResultNumber = 0.0f;
 
         for (int i = 0; i < ListOfOperations.size(); i++){
@@ -50,12 +50,22 @@ public class OperationContainer {
                     float previousNumberFloat = Float.parseFloat(previousNumber.GetRunningNumber());
                     float nextNumberFloat = Float.parseFloat(nextNumber.GetRunningNumber());
                     runningResultNumber = previousNumberFloat + nextNumberFloat;
+                } else if (calculationTpye.GetOperationType() == OperationType.Subtract){
+                    OperationNumber previousNumber = (OperationNumber) ListOfOperations.get(i-1);
+                    OperationNumber nextNumber = (OperationNumber) ListOfOperations.get(i+1);
+                    float previousNumberFloat = Float.parseFloat(previousNumber.GetRunningNumber());
+                    float nextNumberFloat = Float.parseFloat(nextNumber.GetRunningNumber());
+                    runningResultNumber = previousNumberFloat - nextNumberFloat;
                 }
             } else if (i != ListOfOperations.size()-1){
                 if (calculationTpye.GetOperationType() == OperationType.Add){
                     OperationNumber nextNumber = (OperationNumber) ListOfOperations.get(i+1);
                     float nextNumberFloat = Float.parseFloat(nextNumber.GetRunningNumber());
                     runningResultNumber += nextNumberFloat;
+                } else if(calculationTpye.GetOperationType() == OperationType.Subtract){
+                    OperationNumber nextNumber = (OperationNumber) ListOfOperations.get(i+1);
+                    float nextNumberFloat = Float.parseFloat(nextNumber.GetRunningNumber());
+                    runningResultNumber -= nextNumberFloat;
                 }
             }
         }

@@ -29,6 +29,7 @@ public class MainActivity extends Activity {
     private TextView myCalculationDisplay;
 
     private String addDisplay = "+";
+    private String subtractDisplay = "-";
 
     private OperationNumber runningNumber;
 
@@ -168,7 +169,21 @@ public class MainActivity extends Activity {
         myButton_minus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("Button number:","-");
+                OperationBase buttonOperation = new OperationBase(OperationType.Subtract);
+                OperationNumber numberToAdd = new OperationNumber(OperationType.Number);
+                numberToAdd.SetRunningNumber(runningNumber.GetRunningNumber());
+                if (!Calculation.IsOpertationListEmpty()){
+                    if (!Calculation.IsLastOperationAnumber()){
+                        Calculation.AddOperationToList(numberToAdd);
+                        Calculation.AddOperationToList(buttonOperation);
+                        runningNumber.ClearRunningNumber();
+                    }
+                } else {
+                    Calculation.AddOperationToList(numberToAdd);
+                    Calculation.AddOperationToList(buttonOperation);
+                    runningNumber.ClearRunningNumber();
+                }
+                UpdateCalculationDisplay();
             }
         });
 
@@ -231,6 +246,8 @@ public class MainActivity extends Activity {
                 displayText +=  number.GetRunningNumber();
             } else if (currentBase.GetOperationType() == OperationType.Add){
                 displayText +=  addDisplay;
+            } else if (currentBase.GetOperationType() == OperationType.Subtract){
+                displayText += subtractDisplay;
             }
         }
 

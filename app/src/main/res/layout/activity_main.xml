@@ -17,7 +17,7 @@
         android:ems="10"
         android:gravity="center_vertical"
         android:inputType="textPersonName"
-        android:text="Enter values..."
+        android:text=""
         android:textSize="24sp" />
 
     <TableLayout
