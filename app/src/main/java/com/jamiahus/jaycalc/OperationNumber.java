@@ -14,10 +14,13 @@ public class OperationNumber extends OperationBase {
         //Log.d("Append:", RunningNumber);
     }
 
+    public boolean IsDecimalPresent(){
+        return RunningNumber.contains(".");
+    }
+
     public void UnAppendNumberToRunningNumber(){
         int lastIndexNumber = RunningNumber.length();
         RunningNumber = RunningNumber.substring(0,lastIndexNumber - 1);
-        //Log.d("Unappend:", RunningNumber);
     }
 
     public String GetRunningNumber() {

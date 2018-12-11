@@ -27,6 +27,10 @@ public class OperationContainer {
         return ListOfOperations.size() == 0;
     }
 
+    public void ClearCalculationList(){
+        ListOfOperations.clear();
+    }
+
     public String CalculateEquation(){
         String finalResult = "Error";
         float runningResultNumber = 0.0f;

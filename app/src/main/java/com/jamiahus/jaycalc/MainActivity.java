@@ -66,7 +66,9 @@ public class MainActivity extends Activity {
         myButton_2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("Button number:","2");
+                String buttonValue = "2";
+                AppendNumberToRunningNumber(buttonValue);
+                UpdateCalculationDisplay();
             }
         });
 
@@ -74,7 +76,9 @@ public class MainActivity extends Activity {
         myButton_3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("Button number:","3");
+                String buttonValue = "3";
+                AppendNumberToRunningNumber(buttonValue);
+                UpdateCalculationDisplay();
             }
         });
 
@@ -82,7 +86,9 @@ public class MainActivity extends Activity {
         myButton_4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("Button number:","4");
+                String buttonValue = "4";
+                AppendNumberToRunningNumber(buttonValue);
+                UpdateCalculationDisplay();
             }
         });
 
@@ -90,7 +96,9 @@ public class MainActivity extends Activity {
         myButton_5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("Button number:","5");
+                String buttonValue = "5";
+                AppendNumberToRunningNumber(buttonValue);
+                UpdateCalculationDisplay();
             }
         });
 
@@ -98,7 +106,9 @@ public class MainActivity extends Activity {
         myButton_6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("Button number:","6");
+                String buttonValue = "6";
+                AppendNumberToRunningNumber(buttonValue);
+                UpdateCalculationDisplay();
             }
         });
 
@@ -106,7 +116,9 @@ public class MainActivity extends Activity {
         myButton_7.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("Button number:","7");
+                String buttonValue = "7";
+                AppendNumberToRunningNumber(buttonValue);
+                UpdateCalculationDisplay();
             }
         });
 
@@ -114,7 +126,9 @@ public class MainActivity extends Activity {
         myButton_8.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("Button number:","8");
+                String buttonValue = "8";
+                AppendNumberToRunningNumber(buttonValue);
+                UpdateCalculationDisplay();
             }
         });
 
@@ -122,7 +136,9 @@ public class MainActivity extends Activity {
         myButton_9.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("Button number:","9");
+                String buttonValue = "9";
+                AppendNumberToRunningNumber(buttonValue);
+                UpdateCalculationDisplay();
             }
         });
 
@@ -168,7 +184,9 @@ public class MainActivity extends Activity {
         myButton_dot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("Button number:",".");
+                String buttonValue = ".";
+                AppendNumberToRunningNumber(buttonValue);
+                UpdateCalculationDisplay();
             }
         });
 
@@ -188,7 +206,6 @@ public class MainActivity extends Activity {
         myButton_equals.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 if (!runningNumber.IsRunningNumberEmpty()){
                     OperationNumber numberToAdd = new OperationNumber(OperationType.Number);
                     numberToAdd.SetRunningNumber(runningNumber.GetRunningNumber());
@@ -196,7 +213,8 @@ public class MainActivity extends Activity {
                     runningNumber.ClearRunningNumber();
                 }
                 UpdateCalculationDisplay();
-                Calculation.CalculateEquation();
+                DisplayCalculationOnDisplay();
+                Calculation.ClearCalculationList();
 
                 //TODO: Determine if it is best to clear the calcuation variable should be cleared as well. I am thinking that the calculation
             }
@@ -220,14 +238,20 @@ public class MainActivity extends Activity {
         myCalculationDisplay.setText(displayText);
     }
 
+    private void DisplayCalculationOnDisplay(){
+        myCalculationDisplay.setText(Calculation.CalculateEquation());
+    }
+
     private void AppendNumberToRunningNumber(String buttonValue){
 
         if (!runningNumber.GetRunningNumber().isEmpty()){
             runningNumber.AppendNumberToRunningNumber(buttonValue);
-            Log.d("Append Test (1): ",runningNumber.GetRunningNumber());
         } else if (!buttonValue.equals("0")){
-            runningNumber.SetRunningNumber(buttonValue);
-            Log.d("After empty (1): ", runningNumber.GetRunningNumber());
+            if (buttonValue.equals(".") & !runningNumber.IsDecimalPresent()){
+                runningNumber.SetRunningNumber(buttonValue);
+            } else if (!buttonValue.equals(".")){
+                runningNumber.SetRunningNumber(buttonValue);
+            }
         }
     }
 }
