@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
     //Buttons for main screen
@@ -25,6 +26,7 @@ public class MainActivity extends Activity {
     private Button myButton_dot;
     private Button myButton_delete;
     private Button myButton_equals;
+    private Button myButton_multiply;
 
     private TextView myCalculationDisplay;
 
@@ -191,7 +193,17 @@ public class MainActivity extends Activity {
         myButton_divide.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("Button number:","/");
+                String message = "Division feature coming soon";
+                Toast.makeText(getApplicationContext(),message,Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        myButton_multiply = findViewById(R.id.button_multiply);
+        myButton_multiply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String message = "Multiplication feature coming soon";
+                Toast.makeText(getApplicationContext(),message,Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -209,11 +221,8 @@ public class MainActivity extends Activity {
         myButton_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!runningNumber.GetRunningNumber().isEmpty()){
-                    //Start
-                    runningNumber.UnAppendNumberToRunningNumber();
-                    Log.d("After Delete: ", runningNumber.GetRunningNumber());
-                }
+                String message = "Delete feature coming soon";
+                Toast.makeText(getApplicationContext(),message,Toast.LENGTH_SHORT).show();
             }
         });
 
